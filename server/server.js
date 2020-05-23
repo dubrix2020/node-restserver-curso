@@ -1,6 +1,8 @@
 require('./config/config.js');
 
 const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 
 const bodyParse = require('body-parser');
@@ -10,26 +12,15 @@ app.use(bodyParse.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParse.json());
 
+app.use(require('./routes/usuario'));
 
-app.get('/usuario', (req, res) => {
-    res.json('GET Usuario')
-});
 
-app.post('/usuario', (req, res) => {
+//conexión a Mongoose
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
 
-    let body = req.body;
+    if (err) throw err;
 
-    res.json({
-        persona: body
-    });
-});
-
-app.put('/usuario', (req, res) => {
-    res.json('PUT Usuario')
-});
-
-app.delete('/usuario', (req, res) => {
-    res.json('DELETE Usuario')
+    console.log('Base de datos OnLine...');
 });
 
 app.listen(process.env.PORT, () => {
