@@ -34,7 +34,6 @@ app.get('/usuario', (req, res) => {
                     cantidad: conteo
                 })
             });
-
         });
 });
 
