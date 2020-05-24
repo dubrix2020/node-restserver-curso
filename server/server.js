@@ -12,14 +12,13 @@ app.use(bodyParse.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParse.json());
 
-app.use(require('./routes/usuario'));
-
+//Configuración global de rutas
+app.use(require('./routes/index'));
 
 //conexión a Mongoose
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
 
     if (err) throw err;
-
     console.log('Base de datos OnLine...');
 });
 
